@@ -1,0 +1,10 @@
+{{ $result := newScratch }}
+{{ $result.Set "pages" slice }}
+
+{{ range .Site.RegularPages }}
+  {{ $cover := .Params.image | absURL }}
+  {{ $video := .Params.video | absURL }}
+  {{ $result.Add "pages" (dict "url" .RelPermalink "title" .Title "content" .Plain "tags" .Params.tags "excerpt" .Params.excerpt "cover" $cover "video" $video) }}
+{{ end }}
+
+{{ $result.Get "pages" | jsonify }}

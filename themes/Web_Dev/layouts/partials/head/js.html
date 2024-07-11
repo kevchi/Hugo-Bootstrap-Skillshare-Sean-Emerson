@@ -1,0 +1,17 @@
+<!-- js.html -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{{- with resources.Get "js/main.js" }}
+  {{- if eq hugo.Environment "development" }}
+    {{- with . | js.Build }}
+      <script src="{{ .RelPermalink }}"></script>
+    {{- end }}
+  {{- else }}
+    {{- $opts := dict "minify" true }}
+    {{- with . | js.Build $opts | fingerprint }}
+      <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"></script>
+    {{- end }}
+  {{- end }}
+{{- end }}

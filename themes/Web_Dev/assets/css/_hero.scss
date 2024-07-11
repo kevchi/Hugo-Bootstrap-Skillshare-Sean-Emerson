@@ -1,0 +1,84 @@
+/* _hero.scss */
+
+.rad-showcase {
+    position: relative;
+    padding: 100px 0;
+    color: #fff;
+    background-color: green;
+    // background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('assets/images/hero/showcase@2x.png') no-repeat center center / cover;
+  
+    &__bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+  
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  
+    &__bg--mobile {
+      display: none;
+    }
+  
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+  
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+  
+      span {
+        display: block;
+        font-size: 2rem;
+        font-weight: 300;
+      }
+    }
+  
+    .lead {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .btn-primary {
+      background-color: $dark-color;
+      border-color: $dark-color;
+      color: $light-color;
+    }
+  
+    .platform-links {
+      margin-top: 2rem;
+  
+      a {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-right: 1rem;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      &__bg {
+        display: none;
+      }
+  
+      &__bg--mobile {
+        display: block;
+      }
+  
+      h1 {
+        font-size: 2rem;
+  
+        span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  

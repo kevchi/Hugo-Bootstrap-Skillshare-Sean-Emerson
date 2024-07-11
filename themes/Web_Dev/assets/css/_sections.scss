@@ -1,0 +1,23 @@
+/**
+* Sections
+**/
+
+.section {
+	position: relative;
+	z-index: 2;
+}
+
+.lui-gradient-top {
+	background-color: transparent;
+	background-image: linear-gradient(0deg, #FFFFFF 0%, #F0EBE3 100%);
+}
+
+.lui-gradient-bottom {
+	background-color: transparent;
+	background-image: linear-gradient(180deg, #FFFFFF 0%, #F0EBE3 100%);
+}
+
+.lui-gradient-center {
+	background-color: transparent;
+	background-image: linear-gradient(180deg, #F0EBE3 0%, #F0EBE3 100%);
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ or site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
+<head>
+  {{ partial "head.html" . }}
+</head>
+<body>
+    {{ partial "header.html" . }}
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer>
+    {{ partial "footer.html" . }}
+  </footer>
+</body>
+</html>
+
+
+{{/*  <div class="container-page ">
+  {{ "<!-- Preloader -->" | safeHTML }}
+  {{ partial "preloader.html" . }}  */}}
+
+    {{/*  {{ "<!-- Wrapper -->" | safeHTML }}
+		<div class="wrapper{{ if .IsPage }}{{ if or ( eq .Type "blog" ) ( eq .Type "page" ) }} single-post{{ end }}{{ end }}{{ if .IsPage }}{{ if eq .Type "portfolio" }} portfolio-template{{ end }}{{ end }}">
+      {{ block "main" . }}{{ end }}
+    </div>  */}}
+
+  {{/*  {{ "<!-- Scripts -->" | safeHTML }}
+  {{ partial "scripts.html" . }}  */}}
+
+{{/*  </div>  */}}

@@ -1,0 +1,39 @@
+// main.scss
+
+// Import variables
+@import 'variables';
+
+// Import Bootstrap (optional, for customizing Bootstrap later)
+// @import 'bootstrap';
+
+// Import header styles
+@import 'header';
+
+// Import hero styles
+@import 'hero';
+
+/* Add any additional global styles here */
+
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  background-color: $body-bg;
+  color: $body-color;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+}

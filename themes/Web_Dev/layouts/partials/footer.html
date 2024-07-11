@@ -1,0 +1,33 @@
+{{ $footer := .Site.Params.footer }}
+{{ $social := .Site.Params.social }}
+{{ with $footer }}
+
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			
+				<div class="social-links">
+
+					<ul>
+						{{ range $social }}
+						<li>
+							<a href="{{ .url }}" target="_blank" title="{{ .title }}">
+								{{ .title }}
+							</a>
+						</li>	
+						{{ end }}
+					</ul>
+
+				</div>
+
+				<div class="copyright">
+					<p>{{ .copyright | safeHTML }} {{ now.Year }}. Design & Coded by<a href='http://YourWebsite.com' target='_blank'> Creative Designs</a></p>
+                    {{/*  <p>Copyright {{ now.Year }}. All rights reserved.</p>  */}}
+				</div>
+			</div>
+		</div>
+	</div>	
+</footer>
+
+{{ end }}

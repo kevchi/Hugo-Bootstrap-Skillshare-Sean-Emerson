@@ -1,0 +1,12 @@
+<!-- css.html -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+{{- with resources.Get "css/main.scss" }}
+  {{- if eq hugo.Environment "development" }}
+    {{- $styles := . | toCSS }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+  {{- else }}
+    {{- $styles := . | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
+  {{- end }}
+{{- end }}
