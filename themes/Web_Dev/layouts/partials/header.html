@@ -1,5 +1,4 @@
-<!-- header.html -->
-<header id="main-header" class="py-3">
+<header id="main-header" class="fixed-top py-3 bg-white shadow-light">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-md-4">
@@ -8,45 +7,8 @@
         </div>
       </div>
       <div class="col-md-8">
-        <nav class="navbar navbar-expand-md navbar-light justify-content-end">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-              {{ $currentPage := . }}
-              {{ range .Site.Menus.main }}
-              {{ $menuURL := .URL | absLangURL }}
-              {{ $pageURL := $currentPage.Permalink | absLangURL }}
-              {{ $active := eq $menuURL $pageURL }}
-              <li class="nav-item{{ if $active }} active{{ end }}{{ if .HasChildren }} dropdown{{ end }}">
-                <a class="nav-link{{ if .HasChildren }} dropdown-toggle{{ end }}" href="{{ $menuURL }}" {{ if .HasChildren }}id="navbarDropdown{{ .Identifier }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{{ end }}>
-                  {{ .Name }}
-                </a>
-                {{ if .HasChildren }}
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown{{ .Identifier }}">
-                  {{ range .Children }}
-                  <a class="dropdown-item" href="{{ .URL }}">{{ .Name }}</a>
-                  {{ end }}
-                </div>
-                {{ end }}
-              </li>
-              {{ end }}
-            </ul>
-          </div>
-        </nav>
+        {{ partial "menu.html" . }}
       </div>
     </div>
   </div>
 </header>
-
-<script>
-  window.addEventListener('scroll', function() {
-    var header = document.getElementById('main-header');
-    if (window.scrollY > 5) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  });
-</script>

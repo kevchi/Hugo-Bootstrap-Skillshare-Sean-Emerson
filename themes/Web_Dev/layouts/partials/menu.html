@@ -1,51 +1,23 @@
-{{- /*
-Renders a menu for the given menu ID.
+<nav id="siteNavbar" class="site-navbar site-navbar-transparent navbar navbar-expand-lg navbar-dark bg-white shadow-light py-2" data-navbar-base="navbar-dark" data-navbar-toggled="navbar-light" data-navbar-scrolled="navbar-light">
+  <a class="navbar-brand" href="{{ .Site.BaseURL }}">
+    <img src="assets/images/logo-white.png" alt="" class="navbar-brand-img navbar-brand-img-light">
+    <img src="assets/images/logo-dark.png" alt="" class="navbar-brand-img navbar-brand-img-dark">
+  </a>
 
-@context {page} page The current page.
-@context {string} menuID The menu ID.
+  <button class="navbar-toggler-alternative" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="siteNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-alternative-icon">
+      <span></span>
+    </span>
+  </button>
 
-@example: {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
-*/}}
-
-{{- $page := .page }}
-{{- $menuID := .menuID }}
-
-{{- with index site.Menus $menuID }}
-  <nav>
-    <ul>
-      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+  <div class="navbar-collapse collapse" id="navbarCollapse">
+    <ul class="navbar-nav ml-auto">
+      {{ range .Site.Menus.main }}
+      <li class="nav-item">
+        <a class="nav-link scrollto" href="{{ .URL }}">{{ .Name }}</a>
+      </li>
+      {{ end }}
     </ul>
-  </nav>
-{{- end }}
-
-{{- define "partials/inline/menu/walk.html" }}
-  {{- $page := .page }}
-  {{- range .menuEntries }}
-    {{- $attrs := dict "href" .URL }}
-    {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
-    {{- else if $page.HasMenuCurrent .Menu .}}
-      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
-    {{- end }}
-    {{- $name := .Name }}
-    {{- with .Identifier }}
-      {{- with T . }}
-        {{- $name = . }}
-      {{- end }}
-    {{- end }}
-    <li>
-      <a
-        {{- range $k, $v := $attrs }}
-          {{- with $v }}
-            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-          {{- end }}
-        {{- end -}}
-      >{{ $name }}</a>
-      {{- with .Children }}
-        <ul>
-          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
-        </ul>
-      {{- end }}
-    </li>
-  {{- end }}
-{{- end }}
+    <a class="btn btn-white d-block d-lg-inline-block ml-lg-3" href="#!" target="_blank" rel="noopener nofollow" data-on-navbar-light="btn-primary" data-on-navbar-dark="btn-white">Buy now</a>
+  </div>
+</nav>

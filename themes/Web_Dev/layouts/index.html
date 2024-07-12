@@ -1,21 +1,11 @@
 {{ define "main" }}
-
-{{ partial "heroSection.html" . }}
-
-{{ partial "servicesSection.html" . }}
-
-{{ partial "skillsSection.html" . }}
-
-{{ partial "portfolioSection.html" . }}
-
-{{ partial "resumeSection.html" . }}
-
-{{ partial "testimonialSection.html" . }}
-
-{{ partial "pricingSection.html" . }}
-
-{{ partial "blogSection.html" . }}
-
-{{ partial "contactSection.html" . }}
-
+  {{ partial "hero.html" . }}
+  {{ partial "about.html" . }}
+  {{ partial "skills.html" . }}
+  {{ partial "education.html" . }}
+  {{ partial "experience.html" . }}
+  {{ partial "services.html" . }}
+  {{ partial "portfolio.html" . }}
+  {{ partial "blog.html" . }}
+  {{ partial "contact.html" . }}
 {{ end }}

@@ -1,0 +1,12 @@
+<section class="blog" id="blog">
+	<div class="container">
+	  <h2 class="blog-title">Latest Blog Posts</h2>
+	  {{ range .Site.RegularPages }}
+		<div class="blog-post">
+		  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+		  <p>{{ .Summary }}</p>
+		</div>
+	  {{ end }}
+	</div>
+  </section>
+  
