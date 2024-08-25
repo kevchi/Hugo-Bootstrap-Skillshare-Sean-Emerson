@@ -1,0 +1,4 @@
+{{ define "isActive" }}
+Current Menu: {{ .Menu.Name }} - Active: {{ .IsMenuCurrent "main" }}
+{{ if .IsMenuCurrent "main" }}active{{ end }}
+{{ end }}

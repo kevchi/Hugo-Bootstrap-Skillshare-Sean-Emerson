@@ -1,6 +1,6 @@
 # General Settings
 title = "Web_Dev - Clean & Minimal Portfolio Hugo Theme"
-baseURL = "https://example.com/" # Replace with your site URL
+baseURL = "http://localhost:1313/" 
 languageCode = "en-us"
 theme = "Web_Dev"
 resourceDir = "resources"
@@ -23,9 +23,9 @@ DefaultContentLanguage = "en"
     weight = 2
 
   [[menu.main]]
-    identifier = "services"
-    name = "Services"
-    url = "#services"
+    identifier = "skills"
+    name = "Skills"
+    url = "#skills"
     weight = 3
 
   [[menu.main]]
@@ -46,9 +46,29 @@ DefaultContentLanguage = "en"
     url = "#contact"
     weight = 6
 
+  [[menu.main]]
+    identifier = "more"
+    name = "More"
+    url = "#more"
+    weight = 7
+
+  [[menu.main]]
+    identifier = "blog-pages"
+    parent = "more"
+    name = "Blog Page"
+    url = "/blog/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "portfolio-pages"
+    parent = "more"
+    name = "Portfolio Page"
+    url = "/blog/"
+    weight = 2
+
 # Main Settings
 [params]
-defaultLogo = "images/logo-dark.png"
+defaultLogo = "images/logo-white.png"
 defaultKeywords = ["clean", "minimal", "blog", "responsive", "google analytics", "bootstrap", "portfolio", "personal", "modern", "parallax", "hugo theme", "creative"]
 defaultDescription = "Creative Designs - Clean & Minimal Portfolio Hugo Theme"
 dateFormat = "January 2, 2006"
@@ -57,6 +77,11 @@ disqusComments = "" # YOUR DISQUS COMMENTS SHORTNAME
 formspreeFormID = "" # YOUR FORMSPREE FORM ID
 reCAPTCHAKey = "" # YOUR reCAPTCHA v2 key
 googleMapsApiKey = "" # YOUR GOOGLE API KEY
+
+# Header Settings
+[params.header]
+logo = "images/logo2.png"
+logo_alt = "Kevin Chisholm"
 
 [params.about]
 
@@ -77,3 +102,9 @@ googleMapsApiKey = "" # YOUR GOOGLE API KEY
 # Output Formats
 [outputs]
 home = ["HTML", "RSS", "JSON"]
+
+[build]
+  writeStats = true
+
+[minify]
+  minifyJS = true
