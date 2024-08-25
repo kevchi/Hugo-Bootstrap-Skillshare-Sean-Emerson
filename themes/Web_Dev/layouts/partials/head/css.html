@@ -1,17 +1,25 @@
+<!-- External Libs CSS -->
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" type="text/css">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/themify-icons/1.0.1/css/themify-icons.min.css" rel="stylesheet" type="text/css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.14/featherlight.min.css" rel="stylesheet" type="text/css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.14/featherlight.gallery.min.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-{{- with resources.Get "css/main.scss" }}
-  {{- if eq hugo.Environment "development" }}
-    {{- $styles := . | toCSS }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+<!-- Processed Assets CSS -->
+{{- $cssFiles := slice "css/theme.scss" "css/utilities.scss" -}}
+
+{{- range $cssFiles -}}
+  {{- $css := resources.Get . -}}
+  {{- if $css }}
+    {{- if eq hugo.Environment "development" -}}
+      {{- $styles := $css | toCSS (dict "targetPath" (printf "css/%s.css" (path.Base .))) -}}
+      <link rel="stylesheet" href="{{ $styles.RelPermalink }}">
+    {{- else -}}
+      {{- $styles := $css | toCSS (dict "targetPath" (printf "css/%s.css" (path.Base .))) | minify | fingerprint -}}
+      <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
+    {{- end }}
   {{- else }}
-    {{- $styles := . | toCSS | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
+    {{- warnf "Unable to get resource for %s" . -}}
   {{- end }}
 {{- end }}

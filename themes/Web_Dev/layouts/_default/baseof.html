@@ -1,32 +1,151 @@
 <!DOCTYPE html>
 <html lang="{{ or site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
 <head>
-  {{ partial "head.html" . }}
+{{ partial "head.html" . }}
+<style>
+.navbar-nav .active > .nav-link,
+.navbar-nav .nav-link.active {
+  position: relative;
+  color: white !important; /* Default color */
+}
+.navbar-nav .active > .nav-link:before,
+.navbar-nav .nav-link.active:before {
+  content: "";
+  display: block; /* Ensure the underline is shown */
+  position: absolute;
+  width: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 0.725rem;
+  left: 0.75rem;
+  right: 0.75rem;
+  border-bottom: 2px solid white; /* Default underline color */
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: black; /* Navbar light color */
+}
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active {
+  color: black !important; /* Active link color when navbar is light */
+}
+
+.navbar-light .navbar-nav .active > .nav-link:before,
+.navbar-light .navbar-nav .nav-link.active:before {
+  border-bottom: 2px solid black; /* Underline color when navbar is light */
+}
+</style>
 </head>
 <body>
-  {{/*  {{ partial "loader.html" . }}  */}}
-  {{ partial "header.html" . }}
-  <main>
-    {{ block "main" . }}{{ end }}
-  </main>
-  <footer>
-    {{ partial "footer.html" . }}
-  </footer>
+{{ partial "header.html" . }}
+<main>
+{{ block "main" . }}{{ end }}
+</main>
+<footer>
+{{ partial "footer.html" . }}
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var navLinks = document.querySelectorAll('.nav-link');
+  var homeNavItem = document.querySelector('.navbar-nav .nav-item:first-child');
+  var homeNavLink = homeNavItem.querySelector('.nav-link');
+
+  // Add 'home-active' class to the home nav item by default
+  homeNavItem.classList.add('home-active');
+  homeNavLink.classList.add('active');
+
+  function clearActiveClasses() {
+    navLinks.forEach(function(navLink) {
+      navLink.classList.remove('active');
+    });
+  }
+
+  function setActiveLink() {
+    var scrollPosition = window.scrollY;
+    navLinks.forEach(function(navLink) {
+      var section = document.querySelector(navLink.hash);
+      if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
+        clearActiveClasses();
+        navLink.classList.add('active');
+        homeNavItem.classList.remove('home-active'); // Remove 'home-active' class from home item
+      }
+    });
+  }
+
+  document.querySelector('.navbar-nav').addEventListener('click', function(event) {
+    if (event.target.classList.contains('nav-link')) {
+      clearActiveClasses();
+      event.target.classList.add('active');
+      homeNavItem.classList.remove('home-active'); // Remove 'home-active' class from home item
+    }
+  });
+
+  // Initial call to set the active link based on current URL hash
+  var currentHash = window.location.hash;
+  if (currentHash) {
+    var activeLink = document.querySelector('.nav-link[href="' + currentHash + '"]');
+    if (activeLink) {
+      clearActiveClasses();
+      activeLink.classList.add('active');
+    }
+  }
+
+  window.addEventListener('scroll', setActiveLink);
+  // Initial call to set the active link on page load
+  setActiveLink();
+});
+</script>
+
+<script src="path/to/typed.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var options = {
+    strings: ["Kevin Chisholm", "UI/UX Designer", "Fullstack Developer", "Cloud Solutions Architect"],
+    typeSpeed: 50,
+    backSpeed: 50,
+    loop: true
+  };
+  var typed = new Typed(".font-weight-bold", options);
+});
+</script>
+
+{{/* Navbar background */}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  "use strict";
+  var siteNavbar = document.querySelector('.site-navbar');
+  var btnBackToTop = document.querySelector('.btn-back-to-top');
+  window.addEventListener('scroll', function() {
+    var scrollTop = window.scrollY;
+    if (scrollTop > 0) {
+      siteNavbar.classList.add('navbar-scrolled', 'navbar-light');
+      siteNavbar.classList.remove('navbar-dark', 'bg-transparent');
+    } else {
+      siteNavbar.classList.remove('navbar-scrolled', 'navbar-light');
+      siteNavbar.classList.add('navbar-dark', 'bg-transparent');
+    }
+    if (scrollTop > 400) {
+      btnBackToTop.classList.add('show');
+    } else {
+      btnBackToTop.classList.remove('show');
+    }
+  });
+  btnBackToTop.addEventListener('click', function(e) {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  // Initial check on page load
+  var initialScrollTop = window.scrollY;
+  if (initialScrollTop > 0) {
+    siteNavbar.classList.add('navbar-scrolled', 'navbar-light');
+    siteNavbar.classList.remove('navbar-dark', 'bg-transparent');
+  } else {
+    siteNavbar.classList.remove('navbar-scrolled', 'navbar-light');
+    siteNavbar.classList.add('navbar-dark', 'bg-transparent');
+  }
+});
+</script>
 </body>
 </html>
-
-
-
-{{/*  <div class="container-page ">
-  {{ "<!-- Preloader -->" | safeHTML }}
-  {{ partial "preloader.html" . }}  */}}
-
-    {{/*  {{ "<!-- Wrapper -->" | safeHTML }}
-		<div class="wrapper{{ if .IsPage }}{{ if or ( eq .Type "blog" ) ( eq .Type "page" ) }} single-post{{ end }}{{ end }}{{ if .IsPage }}{{ if eq .Type "portfolio" }} portfolio-template{{ end }}{{ end }}">
-      {{ block "main" . }}{{ end }}
-    </div>  */}}
-
-  {{/*  {{ "<!-- Scripts -->" | safeHTML }}
-  {{ partial "scripts.html" . }}  */}}
-
-{{/*  </div>  */}}

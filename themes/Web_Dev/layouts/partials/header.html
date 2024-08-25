@@ -1,14 +1,65 @@
-<header id="main-header" class="fixed-top py-3 bg-white shadow-light">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-4">
-        <div class="logo">
-          <h3 class="mb-0"><a href="{{ .Site.BaseURL }}">{{ .Site.Params.defaultLogo }}</a></h3>
-        </div>
-      </div>
-      <div class="col-md-8">
-        {{ partial "menu.html" . }}
+<header>
+  <!-- Site navigation -->
+  <nav id="siteNavbar" class="site-navbar navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-2" data-navbar-base="navbar-dark" data-navbar-toggled="navbar-dark" data-navbar-scrolled="navbar-light">
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <!-- logo -->
+      <div class="logo">
+        <a href="{{ .Site.BaseURL }}">
+          {{ $header := .Site.Params.header }}
+          <img src="{{ $header.logo | absURL }}" alt="{{ $header.logo_alt }}" />
+        </a>
       </div>
     </div>
-  </div>
+  
+    <button class="navbar-toggler-alternative" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="siteNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-alternative-icon">
+        <span></span>
+      </span>
+    </button>
+  
+    <div class="navbar-collapse collapse" id="navbarCollapse">
+      <ul class="navbar-nav ml-auto">
+        {{ range .Site.Menus.main }}
+        <li class="nav-item">
+          <a class="nav-link scrollto " href="{{ .URL | relURL }}">{{ .Name }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </nav>
+  
+  <!-- Button - Back to top -->
+  <a href="#" class="btn-back-to-top scrollto btn btn-icon btn-primary shadow-light mb-4 mr-4" tabindex="-1">
+    <i class="fas fa-chevron-up btn-icon-inner"></i>
+  </a>
+  </header>
+  
+  
+  
+  
+
+
+
+
+{{/*  <header>
+  <nav id="siteNavbar" class="site-navbar navbar navbar-expand-lg navbar-light fixed-top py-2">
+    <div class="container">
+      <a class="navbar-brand" href="{{ .Site.BaseURL }}">
+        <img src="{{ .Site.Params.header.logo | absURL }}" alt="{{ .Site.Params.header.logo_alt }}" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          {{ range .Site.Menus.main }}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ .URL | relURL }}">{{ .Name }}</a>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </nav>
 </header>
+  */}}

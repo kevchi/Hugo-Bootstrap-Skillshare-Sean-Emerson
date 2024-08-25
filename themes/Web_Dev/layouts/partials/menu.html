@@ -1,4 +1,4 @@
-<nav id="siteNavbar" class="site-navbar site-navbar-transparent navbar navbar-expand-lg navbar-dark bg-white shadow-light py-2" data-navbar-base="navbar-dark" data-navbar-toggled="navbar-light" data-navbar-scrolled="navbar-light">
+<nav id="" class="site-navbar site-navbar-transparent  navbar-expand-lg" data-navbar-base="" data-navbar-toggled="" >
   <a class="navbar-brand" href="{{ .Site.BaseURL }}">
     <img src="assets/images/logo-white.png" alt="" class="navbar-brand-img navbar-brand-img-light">
     <img src="assets/images/logo-dark.png" alt="" class="navbar-brand-img navbar-brand-img-dark">
@@ -14,7 +14,7 @@
     <ul class="navbar-nav ml-auto">
       {{ range .Site.Menus.main }}
       <li class="nav-item">
-        <a class="nav-link scrollto" href="{{ .URL }}">{{ .Name }}</a>
+        <a class="nav-link " href="{{ .URL }}">{{ .Name }}</a>
       </li>
       {{ end }}
     </ul>

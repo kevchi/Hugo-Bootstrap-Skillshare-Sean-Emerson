@@ -1,7 +1,8 @@
 ---
-title: "Home"
+title: "About"
 description: "Bootstrap HTML template and UI kit by Kevin"
-permalink: "/home/"
+permalink: "/about/"
 ---
 
 
+Testing testing one two three
