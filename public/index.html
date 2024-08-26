@@ -28,40 +28,45 @@
       <script src="/js/main.js"></script>
 
 
+
 <style>
-.navbar-nav .active > .nav-link,
-.navbar-nav .nav-link.active {
+.navbar-nav .nav-link {
   position: relative;
-  color: white !important;  
+  color: white;
+  transition: color 0.3s ease;
 }
-.navbar-nav .active > .nav-link:before,
-.navbar-nav .nav-link.active:before {
-  content: "";
-  display: block;  
+
+.navbar-nav .nav-link::after {
+  content: '';
   position: absolute;
-  width: 0.75rem;
-  margin-left: auto;
-  margin-right: auto;
-  bottom: 0.725rem;
-  left: 0.75rem;
-  right: 0.75rem;
-  border-bottom: 2px solid white;  
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: white;  
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.navbar-light .navbar-nav .nav-link::after {
+  background-color: #333;  
+}
+
+.site-navbar .navbar-nav .nav-link {
+  color: white;
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: black;  
+  color: #333;
 }
 
-.navbar-light .navbar-nav .active > .nav-link,
-.navbar-light .navbar-nav .nav-link.active {
-  color: black !important;  
-}
-
-.navbar-light .navbar-nav .active > .nav-link:before,
-.navbar-light .navbar-nav .nav-link.active:before {
-  border-bottom: 2px solid black;  
-}
 </style>
+
 </head>
 <body>
 <header>
@@ -77,13 +82,7 @@
       </div>
     </div>
   
-    <button class="navbar-toggler-alternative" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="siteNavbar" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-alternative-icon">
-        <span></span>
-      </span>
-    </button>
-  
-    <div class="navbar-collapse collapse" id="navbarCollapse">
+    <div class="navbar-dark navbar-collapse collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto">
         
         <li class="nav-item">
@@ -117,6 +116,7 @@
       </ul>
     </div>
   </nav>
+
   
   
   <a href="#" class="btn-back-to-top scrollto btn btn-icon btn-primary shadow-light mb-4 mr-4" tabindex="-1">
@@ -246,7 +246,6 @@ Occaecat nulla excepteur dolore excepteur duis eiusmod ullamco officia anim in v
   </div>
 </section>
 
-
   <section class="contact" id="contact">
   <div class="container">
     <h2 class="contact-title">Contact Me</h2>
@@ -279,104 +278,92 @@ Occaecat nulla excepteur dolore excepteur duis eiusmod ullamco officia anim in v
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var navLinks = document.querySelectorAll('.nav-link');
-  var homeNavItem = document.querySelector('.navbar-nav .nav-item:first-child');
-  var homeNavLink = homeNavItem.querySelector('.nav-link');
-
-  
-  homeNavItem.classList.add('home-active');
-  homeNavLink.classList.add('active');
-
-  function clearActiveClasses() {
-    navLinks.forEach(function(navLink) {
-      navLink.classList.remove('active');
-    });
-  }
-
-  function setActiveLink() {
-    var scrollPosition = window.scrollY;
-    navLinks.forEach(function(navLink) {
-      var section = document.querySelector(navLink.hash);
-      if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
-        clearActiveClasses();
-        navLink.classList.add('active');
-        homeNavItem.classList.remove('home-active'); 
-      }
-    });
-  }
-
-  document.querySelector('.navbar-nav').addEventListener('click', function(event) {
-    if (event.target.classList.contains('nav-link')) {
-      clearActiveClasses();
-      event.target.classList.add('active');
-      homeNavItem.classList.remove('home-active'); 
-    }
-  });
-
-  
-  var currentHash = window.location.hash;
-  if (currentHash) {
-    var activeLink = document.querySelector('.nav-link[href="' + currentHash + '"]');
-    if (activeLink) {
-      clearActiveClasses();
-      activeLink.classList.add('active');
-    }
-  }
-
-  window.addEventListener('scroll', setActiveLink);
-  
-  setActiveLink();
-});
-</script>
-
-<script src="path/to/typed.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var options = {
-    strings: ["Kevin Chisholm", "UI/UX Designer", "Fullstack Developer", "Cloud Solutions Architect"],
-    typeSpeed: 50,
-    backSpeed: 50,
-    loop: true
-  };
-  var typed = new Typed(".font-weight-bold", options);
-});
-</script>
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  "use strict";
   var siteNavbar = document.querySelector('.site-navbar');
+  var navLinks = document.querySelectorAll('.site-navbar .navbar-nav .nav-link');
   var btnBackToTop = document.querySelector('.btn-back-to-top');
-  window.addEventListener('scroll', function() {
+
+  function updateNavbarColors() {
     var scrollTop = window.scrollY;
     if (scrollTop > 0) {
       siteNavbar.classList.add('navbar-scrolled', 'navbar-light');
       siteNavbar.classList.remove('navbar-dark', 'bg-transparent');
+      setNavLinkColors('#333');
     } else {
       siteNavbar.classList.remove('navbar-scrolled', 'navbar-light');
       siteNavbar.classList.add('navbar-dark', 'bg-transparent');
+      setNavLinkColors('white');
     }
+
     if (scrollTop > 400) {
       btnBackToTop.classList.add('show');
     } else {
       btnBackToTop.classList.remove('show');
     }
+
+    
+    updateActiveLink();
+  }
+
+  function setNavLinkColors(color) {
+    navLinks.forEach(function(link) {
+      link.style.color = color;
+      link.style.setProperty('--hover-color', color);
+    });
+  }
+
+  function updateActiveLink() {
+    var scrollPosition = window.scrollY;
+
+    navLinks.forEach(function(link) {
+      var section = document.querySelector(link.getAttribute('href'));
+      if (section) {
+        var sectionTop = section.offsetTop - 100; 
+        var sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateNavbarColors);
+
+  
+  updateNavbarColors();
+
+  
+  navLinks.forEach(function(link) {
+    link.addEventListener('mouseenter', function() {
+      this.style.color = 'var(--hover-color, ' + (window.scrollY > 0 ? '#333' : 'white') + ')';
+    });
+    link.addEventListener('mouseleave', function() {
+      this.style.color = window.scrollY > 0 ? '#333' : 'white';
+    });
   });
+
+  
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var targetId = this.getAttribute('href');
+      var targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 70, 
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
   btnBackToTop.addEventListener('click', function(e) {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-  
-  var initialScrollTop = window.scrollY;
-  if (initialScrollTop > 0) {
-    siteNavbar.classList.add('navbar-scrolled', 'navbar-light');
-    siteNavbar.classList.remove('navbar-dark', 'bg-transparent');
-  } else {
-    siteNavbar.classList.remove('navbar-scrolled', 'navbar-light');
-    siteNavbar.classList.add('navbar-dark', 'bg-transparent');
-  }
 });
 </script>
+
 </body>
 </html>

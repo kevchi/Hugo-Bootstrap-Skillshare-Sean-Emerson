@@ -49,10 +49,6 @@ body {
   overflow-x: hidden;
 }
 
-::selection {
-  color: #fff;
-  background-color: #050CDD;
-}
 
 .bg-primary ::selection {
   color: #050CDD;
@@ -720,7 +716,7 @@ select.form-control.form-control-soft-dark:focus::-ms-value {
 }
 .nav-pills-modern .nav-link.active,
 .nav-pills-modern .show > .nav-link {
-  color: #fff;
+  color: greenyellow;
   background-color: #050CDD;
 }
 
@@ -2698,3 +2694,44 @@ html {
 //     left: 0;
 //     // color: #fff;
 //   }
+
+
+
+
+.site-navbar .navbar-nav .nav-link {
+  transition: color 0.3s ease;
+}
+
+.navbar-light .navbar-nav .nav-link,
+.navbar-dark .navbar-nav .nav-link {
+  color: inherit;
+}
+
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.active {
+  color: inherit !important;
+}
+
+.navbar-light .navbar-nav .active > .nav-link:before,
+.navbar-light .navbar-nav .nav-link.active:before,
+.navbar-dark .navbar-nav .active > .nav-link:before,
+.navbar-dark .navbar-nav .nav-link.active:before {
+  border-bottom-color: currentColor;
+}
+
+
+
+.navbar-nav {
+  position: relative;
+}
+
+.navbar-nav .nav-link {
+  position: relative;
+  z-index: 1;
+}
+
+.navbar-nav .nav-link::before {
+  content: none !important; /* Remove the existing underline */
+}
