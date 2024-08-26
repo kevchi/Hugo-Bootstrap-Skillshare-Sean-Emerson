@@ -2,40 +2,45 @@
 <html lang="{{ or site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
 <head>
 {{ partial "head.html" . }}
+
 <style>
-.navbar-nav .active > .nav-link,
-.navbar-nav .nav-link.active {
+.navbar-nav .nav-link {
   position: relative;
-  color: white !important; /* Default color */
+  color: white;
+  transition: color 0.3s ease;
 }
-.navbar-nav .active > .nav-link:before,
-.navbar-nav .nav-link.active:before {
-  content: "";
-  display: block; /* Ensure the underline is shown */
+
+.navbar-nav .nav-link::after {
+  content: '';
   position: absolute;
-  width: 0.75rem;
-  margin-left: auto;
-  margin-right: auto;
-  bottom: 0.725rem;
-  left: 0.75rem;
-  right: 0.75rem;
-  border-bottom: 2px solid white; /* Default underline color */
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: white; /* Default color */
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link.active::after,
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.navbar-light .navbar-nav .nav-link::after {
+  background-color: #333; /* Color when navbar is light */
+}
+
+.site-navbar .navbar-nav .nav-link {
+  color: white;
 }
 
 .navbar-light .navbar-nav .nav-link {
-  color: black; /* Navbar light color */
+  color: #333;
 }
 
-.navbar-light .navbar-nav .active > .nav-link,
-.navbar-light .navbar-nav .nav-link.active {
-  color: black !important; /* Active link color when navbar is light */
-}
-
-.navbar-light .navbar-nav .active > .nav-link:before,
-.navbar-light .navbar-nav .nav-link.active:before {
-  border-bottom: 2px solid black; /* Underline color when navbar is light */
-}
 </style>
+
 </head>
 <body>
 {{ partial "header.html" . }}
@@ -48,104 +53,92 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var navLinks = document.querySelectorAll('.nav-link');
-  var homeNavItem = document.querySelector('.navbar-nav .nav-item:first-child');
-  var homeNavLink = homeNavItem.querySelector('.nav-link');
-
-  // Add 'home-active' class to the home nav item by default
-  homeNavItem.classList.add('home-active');
-  homeNavLink.classList.add('active');
-
-  function clearActiveClasses() {
-    navLinks.forEach(function(navLink) {
-      navLink.classList.remove('active');
-    });
-  }
-
-  function setActiveLink() {
-    var scrollPosition = window.scrollY;
-    navLinks.forEach(function(navLink) {
-      var section = document.querySelector(navLink.hash);
-      if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
-        clearActiveClasses();
-        navLink.classList.add('active');
-        homeNavItem.classList.remove('home-active'); // Remove 'home-active' class from home item
-      }
-    });
-  }
-
-  document.querySelector('.navbar-nav').addEventListener('click', function(event) {
-    if (event.target.classList.contains('nav-link')) {
-      clearActiveClasses();
-      event.target.classList.add('active');
-      homeNavItem.classList.remove('home-active'); // Remove 'home-active' class from home item
-    }
-  });
-
-  // Initial call to set the active link based on current URL hash
-  var currentHash = window.location.hash;
-  if (currentHash) {
-    var activeLink = document.querySelector('.nav-link[href="' + currentHash + '"]');
-    if (activeLink) {
-      clearActiveClasses();
-      activeLink.classList.add('active');
-    }
-  }
-
-  window.addEventListener('scroll', setActiveLink);
-  // Initial call to set the active link on page load
-  setActiveLink();
-});
-</script>
-
-<script src="path/to/typed.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var options = {
-    strings: ["Kevin Chisholm", "UI/UX Designer", "Fullstack Developer", "Cloud Solutions Architect"],
-    typeSpeed: 50,
-    backSpeed: 50,
-    loop: true
-  };
-  var typed = new Typed(".font-weight-bold", options);
-});
-</script>
-
-{{/* Navbar background */}}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  "use strict";
   var siteNavbar = document.querySelector('.site-navbar');
+  var navLinks = document.querySelectorAll('.site-navbar .navbar-nav .nav-link');
   var btnBackToTop = document.querySelector('.btn-back-to-top');
-  window.addEventListener('scroll', function() {
+
+  function updateNavbarColors() {
     var scrollTop = window.scrollY;
     if (scrollTop > 0) {
       siteNavbar.classList.add('navbar-scrolled', 'navbar-light');
       siteNavbar.classList.remove('navbar-dark', 'bg-transparent');
+      setNavLinkColors('#333');
     } else {
       siteNavbar.classList.remove('navbar-scrolled', 'navbar-light');
       siteNavbar.classList.add('navbar-dark', 'bg-transparent');
+      setNavLinkColors('white');
     }
+
     if (scrollTop > 400) {
       btnBackToTop.classList.add('show');
     } else {
       btnBackToTop.classList.remove('show');
     }
+
+    // Update active link based on scroll position
+    updateActiveLink();
+  }
+
+  function setNavLinkColors(color) {
+    navLinks.forEach(function(link) {
+      link.style.color = color;
+      link.style.setProperty('--hover-color', color);
+    });
+  }
+
+  function updateActiveLink() {
+    var scrollPosition = window.scrollY;
+
+    navLinks.forEach(function(link) {
+      var section = document.querySelector(link.getAttribute('href'));
+      if (section) {
+        var sectionTop = section.offsetTop - 100; // Adjust offset as needed
+        var sectionBottom = sectionTop + section.offsetHeight;
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateNavbarColors);
+
+  // Initial check on page load
+  updateNavbarColors();
+
+  // Add hover effect
+  navLinks.forEach(function(link) {
+    link.addEventListener('mouseenter', function() {
+      this.style.color = 'var(--hover-color, ' + (window.scrollY > 0 ? '#333' : 'white') + ')';
+    });
+    link.addEventListener('mouseleave', function() {
+      this.style.color = window.scrollY > 0 ? '#333' : 'white';
+    });
   });
+
+  // Add click event to nav links for smooth scrolling
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var targetId = this.getAttribute('href');
+      var targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 70, // Adjust offset as needed
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
   btnBackToTop.addEventListener('click', function(e) {
     e.preventDefault();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-  // Initial check on page load
-  var initialScrollTop = window.scrollY;
-  if (initialScrollTop > 0) {
-    siteNavbar.classList.add('navbar-scrolled', 'navbar-light');
-    siteNavbar.classList.remove('navbar-dark', 'bg-transparent');
-  } else {
-    siteNavbar.classList.remove('navbar-scrolled', 'navbar-light');
-    siteNavbar.classList.add('navbar-dark', 'bg-transparent');
-  }
 });
 </script>
+
 </body>
 </html>
