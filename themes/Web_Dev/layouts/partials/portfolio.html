@@ -1,9 +1,179 @@
-<section class="portfolio" id="portfolio">
+<!-- Portfolio -->
+<section id="portfolio" class="py-9 py-xl-12">
   <div class="container">
-    <h2 class="portfolio-title">Portfolio</h2>
-    <div class="portfolio-item">
-      <h3>Project 1</h3>
-      <p>Description of project 1...</p>
+    <div class="row mb-8">
+      <div class="col-lg-10 mx-auto text-center">
+        <h2 class="mb-4">Portfolio</h2>
+        <p class="mb-5">Trust the professionals</p>
+
+        <nav class="masonry-filter">
+          <a href="#" class="btn btn-sm btn-soft-secondary m-1 px-4 active" data-filter="all">All</a>
+          {{ range $key, $value := .Site.Taxonomies.category }}
+          <a href="#" class="btn btn-sm btn-soft-secondary m-1 px-4" data-filter="{{ $key }}">{{ $key | humanize }}</a>
+          {{ end }}
+        </nav>
+      </div>
+    </div>
+    <div class="masonry-container row mx-n4 mt-n6">
+      {{ range where .Site.RegularPages "Section" "portfolio" }}
+        <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item {{ range .Params.categories }}{{ . }} {{ end }}">
+          <a class="card border-0 rounded-3x" href="{{ .Params.image }}" data-featherlight="image" data-title="{{ .Title }}" data-text="{{ .Summary }}">
+            <div class="card-zoom shadow-light">
+              <img class="card-img" src="{{ .Params.image }}" alt="{{ .Title }}">
+            </div>
+            <div class="card-footer p-0 mt-4">
+              <p class="small text-uppercase mb-1 text-muted">{{ with .Params.categories }}{{ index . 0 }}{{ end }}</p>
+              <h4 class="h5 text-dark mb-0">{{ .Title }}</h4>
+            </div>
+          </a>
+        </div>
+      {{ end }}
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{/*  
+    <!-- Portfolio -->
+    <section id="portfolio" class="py-9 py-xl-12">
+      <div class="container">
+        <div class="row mb-8">
+          <div class="col-lg-10 mx-auto text-center">
+            <h2 class="mb-4">Portfolio</h2>
+            <p class="mb-5">Trust the professionals</p>
+            
+            <nav class="masonry-filter">
+              <a href="#" class="btn btn-sm btn-soft-secondary m-1 px-4 active" data-filter="*">All</a>
+              <a href="#" class="btn btn-sm btn-soft-secondary m-1 px-4" data-filter=".web">Web</a>
+              <a href="#" class="btn btn-sm btn-soft-secondary m-1 px-4" data-filter=".branding">Branding</a>
+              <a href="#" class="btn btn-sm btn-soft-secondary m-1 px-4" data-filter=".design">Design</a>
+            </nav>
+          </div>
+        </div>
+        <div class="masonry-container row mx-n4 mt-n6">
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item branding">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-1.jpg" | relURL }}' data-featherlight="image" data-title="Cliff" data-text="Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris.">
+              <div class="card-zoom shadow-light">
+                <img class="card-img" src='{{ "portfolio/portfolio-1.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Branding</p>
+                <h4 class="h5 text-dark mb-0">Cliff</h4>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item design">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-2.jpg" | relURL }}' data-featherlight="image" data-title="Mountains" data-text="Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris.">
+              <div class="card-zoom shadow-light">
+                <img class="card-img-top" src='{{ "portfolio/portfolio-2.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Design</p>
+                <h4 class="h5 text-dark mb-0">Mountains</h4>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item web">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-3.jpg" | relURL }}' data-featherlight="image" data-title="Tropical beach" data-text="Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris.">
+              <div class="card-zoom shadow-light">
+                <img class="card-img" src='{{ "portfolio/portfolio-3.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Web</p>
+                <h4 class="h5 text-dark mb-0">Tropical beach</h4>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item web" data-featherlight-gallery data-featherlight-filter="a">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-4.jpg" | relURL }}'>
+              <div class="card-zoom shadow-light">
+                <img class="card-img" src='{{ "portfolio/portfolio-4.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Web</p>
+                <h4 class="h5 text-dark mb-0">Small islands</h4>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item design" data-featherlight-gallery data-featherlight-filter="a">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-5.jpg" | relURL }}' data-title="Tropical beach" data-text="1. Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris.">
+              <div class="card-zoom shadow-light">
+                <img class="card-img" src='{{ "portfolio/portfolio-5.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Design</p>
+                <h4 class="h5 text-dark mb-0">Waves</h4>
+              </div>
+            </a>
+            <a class="d-none" href="assets/images/photos/photo-1.jpg" data-title="Mountains" data-text="2. Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris."></a>
+          </div>
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item web">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-6.jpg" | relURL }}' data-featherlight="image">
+              <div class="card-zoom shadow-light">
+                <img class="card-img" src='{{ "portfolio/portfolio-6.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Web</p>
+                <h4 class="h5 text-dark mb-0">Bridge</h4>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item design">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-7.jpg" | relURL }}' data-featherlight="image">
+              <div class="card-zoom shadow-light">
+                <img class="card-img" src='{{ "portfolio/portfolio-7.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Design</p>
+                <h4 class="h5 text-dark mb-0">Workspace</h4>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item branding">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-8.jpg" | relURL }}' data-featherlight="image">
+              <div class="card-zoom shadow-light">
+                <img class="card-img" src='{{ "portfolio/portfolio-8.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Branding</p>
+                <h4 class="h5 text-dark mb-0">Long river</h4>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-6 col-md-4 pt-6 px-4 masonry-item branding">
+            <a class="card border-0 rounded-3x" href='{{ "portfolio/portfolio-9.jpg" | relURL }}' data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true" data-featherlight-iframe-width="1200" data-featherlight-iframe-height="675">
+              <div class="card-zoom shadow-light">
+                <img class="card-img" src='{{ "portfolio/portfolio-9.jpg" | relURL }}' alt="">
+              </div>
+              <div class="card-footer p-0 mt-4">
+                <p class="small text-uppercase mb-1 text-muted">Branding</p>
+                <h4 class="h5 text-dark mb-0">Desert</h4>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+      */}}

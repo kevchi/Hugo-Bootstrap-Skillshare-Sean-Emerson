@@ -6,8 +6,36 @@
     <description>Recent content in Home on Web_Dev - Clean &amp; Minimal Portfolio Hugo Theme</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Mar 2023 11:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Mon, 28 Aug 2023 12:00:00 -0500</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cliff</title>
+      <link>http://localhost:1313/portfolio/cliff/</link>
+      <pubDate>Mon, 28 Aug 2023 12:00:00 -0500</pubDate>
+      <guid>http://localhost:1313/portfolio/cliff/</guid>
+      <description>Quisque ultrices non velit sit amet consectetur. Cras turpis dolor, facilisis a nibh non, ullamcorper facilisis mauris.</description>
+    </item>
+    <item>
+      <title>Mountain</title>
+      <link>http://localhost:1313/portfolio/mountain/</link>
+      <pubDate>Mon, 28 Aug 2023 12:00:00 -0500</pubDate>
+      <guid>http://localhost:1313/portfolio/mountain/</guid>
+      <description>Detailed description of the Cliff project goes here.</description>
+    </item>
+    <item>
+      <title>Small Island</title>
+      <link>http://localhost:1313/portfolio/small_islands/</link>
+      <pubDate>Mon, 28 Aug 2023 12:00:00 -0500</pubDate>
+      <guid>http://localhost:1313/portfolio/small_islands/</guid>
+      <description>Summary of this portfolio</description>
+    </item>
+    <item>
+      <title>Tropical beach</title>
+      <link>http://localhost:1313/portfolio/tropical_beach/</link>
+      <pubDate>Mon, 28 Aug 2023 12:00:00 -0500</pubDate>
+      <guid>http://localhost:1313/portfolio/tropical_beach/</guid>
+      <description>test summary</description>
+    </item>
     <item>
       <title>Post 3</title>
       <link>http://localhost:1313/posts/post-3/</link>
@@ -35,6 +63,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/about/</guid>
       <description>Testing testing one two three</description>
+    </item>
+    <item>
+      <title>Explore</title>
+      <link>http://localhost:1313/portfolio/explore/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/explore/</guid>
+      <description></description>
     </item>
   </channel>
 </rss>

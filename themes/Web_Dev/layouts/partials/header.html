@@ -1,12 +1,11 @@
 <header>
-  <!-- Site navigation -->
   <nav id="siteNavbar" class="site-navbar navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-2" data-navbar-base="navbar-dark" data-navbar-toggled="navbar-dark" data-navbar-scrolled="navbar-light">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       <!-- logo -->
       <div class="logo">
         <a href="{{ .Site.BaseURL }}">
           {{ $header := .Site.Params.header }}
-          <img src="{{ $header.logo | absURL }}" alt="{{ $header.logo_alt }}" />
+          <img id="logoImage" src="/images/name_logo_v2.png" alt="profile_photo" class="photo" style="height:50px; width:150px; margin-top: 15px; margin-bottom:-2px; margin-left:30px;">
         </a>
       </div>
     </div>
@@ -14,14 +13,36 @@
     <div class="navbar-dark navbar-collapse collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto">
         {{ range .Site.Menus.main }}
-        <li class="nav-item">
-          <a class="nav-link scrollto " href="{{ .URL | relURL }}">{{ .Name }}</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link scrollto" href="{{ .URL | relURL }}">{{ .Name }}</a>
+          </li>
         {{ end }}
+  
+        <!-- Separate dropdown menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle scrollable-nav-item" href="#" id="more-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More
+            <img src="/images/dropdown-menu-icon-12.jpg" alt="Dropdown" class="dropdown-icon ml-1">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="more-dropdown">
+            <!-- Section links (on homepage) -->
+            <a class="dropdown-item scrollto" href="#education">Education</a>
+            <a class="dropdown-item scrollto" href="#experience">Experience</a>
+            <a class="dropdown-item scrollto" href="#services">Services</a>
+            <a class="dropdown-item scrollto" href="#contact">Contact</a>
+            
+            <!-- Separator -->
+            {{/*  <div class="dropdown-divider"></div>  */}}
+            <hr>
+            <!-- Page links -->
+            {{ range .Site.Menus.dropdown }}
+              <a class="dropdown-item" href="{{ .URL | relURL }}">{{ .Name }}</a>
+            {{ end }}
+          </div>
+        </li>
       </ul>
     </div>
   </nav>
-
   
   <!-- Button - Back to top -->
   <a href="#" class="btn-back-to-top scrollto btn btn-icon btn-primary shadow-light mb-4 mr-4" tabindex="-1">
@@ -29,32 +50,40 @@
   </a>
   </header>
   
-  
-  
-  
-
-
-
-
-{{/*  <header>
-  <nav id="siteNavbar" class="site-navbar navbar navbar-expand-lg navbar-light fixed-top py-2">
-    <div class="container">
-      <a class="navbar-brand" href="{{ .Site.BaseURL }}">
-        <img src="{{ .Site.Params.header.logo | absURL }}" alt="{{ .Site.Params.header.logo_alt }}" />
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav ml-auto">
-          {{ range .Site.Menus.main }}
-          <li class="nav-item">
-            <a class="nav-link" href="{{ .URL | relURL }}">{{ .Name }}</a>
-          </li>
-          {{ end }}
-        </ul>
-      </div>
-    </div>
-  </nav>
-</header>
-  */}}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var dropdownItems = document.querySelectorAll('.dropdown-item.scrollto');
+      var logoImage = document.getElementById('logoImage');
+      var siteNavbar = document.getElementById('siteNavbar');
+    
+      dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          var targetId = this.getAttribute('href').substring(1);
+          var targetSection = document.getElementById(targetId);
+    
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+    
+          // Close the dropdown after clicking
+          document.querySelector('.dropdown-menu').style.display = 'none';
+        });
+      });
+    
+      // Function to update logo based on navbar background
+      function updateLogo() {
+        if (siteNavbar.classList.contains('navbar-scrolled')) {
+          logoImage.src = '/images/name_logo.png';
+        } else {
+          logoImage.src = '/images/name_logo_v2.png';
+        }
+      }
+    
+      // Initial logo update
+      updateLogo();
+    
+      // Update logo on scroll
+      window.addEventListener('scroll', updateLogo);
+    });
+    </script>

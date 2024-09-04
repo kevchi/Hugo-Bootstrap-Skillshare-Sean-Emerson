@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-<meta charset="utf-8">
+
+    <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Post 3 | Web_Dev - Clean &amp; Minimal Portfolio Hugo Theme</title>
 
@@ -15,68 +16,199 @@
 <link rel="stylesheet" href="/css/theme.scss.css"><link rel="stylesheet" href="/css/utilities.scss.css">
 
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.14/featherlight.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.14/featherlight.gallery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" defer></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.14/featherlight.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.7.14/featherlight.gallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12" defer></script>
 
 
-      <script src="/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" defer></script>
+
+
+      <script src="/js/main.js" defer></script>
 
 
 
-<style>
-.navbar-nav .nav-link {
-  position: relative;
-  color: white;
-  transition: color 0.3s ease;
-}
 
-.navbar-nav .nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  background-color: white;  
-  transition: all 0.3s ease;
-}
+    <style>
+      .navbar-nav .nav-link {
+          position: relative;
+          transition: color 0.3s ease;
+      }
 
-.navbar-nav .nav-link.active::after,
-.navbar-nav .nav-link:hover::after {
-  width: 100%;
-  left: 0;
-}
+      .navbar-nav .nav-link::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: 0;
+          left: 50%;
+          transition: all 0.3s ease;
+      }
 
-.navbar-light .navbar-nav .nav-link::after {
-  background-color: #333;  
-}
+      .navbar-nav .nav-link.active::after,
+      .navbar-nav .nav-link:hover::after {
+          width: 100%;
+          left: 0;
+      }
 
-.site-navbar .navbar-nav .nav-link {
-  color: white;
-}
+      .navbar-light .navbar-nav .nav-link {
+          color: black;
+      }
 
-.navbar-light .navbar-nav .nav-link {
-  color: #333;
-}
+      .navbar-light .navbar-nav .nav-link::after {
+          background-color: black;
+      }
 
-</style>
+      .site-navbar .navbar-nav .nav-link {
+          color: white;
+      }
+
+      .site-navbar .navbar-nav .nav-link::after {
+          background-color: white;
+      }
+
+       
+      .navbar-nav .nav-link.active::after {
+          width: 100% !important;
+      }
+
+      .btn-back-to-top {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          display: none;
+          z-index: 1000;
+      }
+
+      .btn-back-to-top.show {
+          display: block;
+      }
+
+       
+      .dropdown-toggle::after {
+          display: none !important;
+      }
+
+      .dropdown-icon {
+          width: 20px;
+          height: 20px;
+          transition: transform 0.3s ease;
+          margin-left: 5px;
+      }
+
+      .dropdown:hover .dropdown-icon {
+          transform: rotate(180deg);
+      }
+
+      .dropdown-menu {
+          display: block;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1000;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+      }
+
+      .dropdown-item {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+      }
+
+      .dropdown-item:hover {
+          background-color: #f1f1f1;
+      }
+
+      .nav-link.dropdown-toggle {
+          display: flex;
+          align-items: center;
+      }
+
+      .down-arrow {
+          font-size: 24px;
+      }
+
+      .down-arrow::before {
+          content: "\25BC";
+          font-size: 24px;
+      }
+
+
+       
+      .navbar-scrolled {
+        background-color: white !important;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar-scrolled .navbar-nav .nav-link {
+        color: black !important;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-scrolled .navbar-nav .nav-link::after {
+        background-color: black !important;
+    }
+
+    .navbar-transparent {
+        background-color: transparent !important;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar-transparent .navbar-nav .nav-link {
+        color: white !important;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-transparent .navbar-nav .nav-link::after {
+        background-color: white !important;
+    }
+
+     
+    .navbar-transparent .dropdown-icon {
+        filter: brightness(0) invert(1);
+    }
+
+    .navbar-scrolled .dropdown-icon {
+        filter: none;
+    }
+
+     
+    .navbar-transparent .navbar-nav .nav-link.active {
+        color: white !important;
+    }
+
+    .navbar-scrolled .navbar-nav .nav-link.active {
+        color: black !important;
+    }
+  </style>
 
 </head>
+
 <body>
-<header>
-  
+
+  <header>
   <nav id="siteNavbar" class="site-navbar navbar navbar-expand-lg navbar-dark bg-transparent fixed-top py-2" data-navbar-base="navbar-dark" data-navbar-toggled="navbar-dark" data-navbar-scrolled="navbar-light">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
       
       <div class="logo">
         <a href="http://localhost:1313/">
           
-          <img src="http://localhost:1313/images/logo2.png" alt="Kevin Chisholm" />
+          <img id="logoImage" src="/images/name_logo_v2.png" alt="profile_photo" class="photo" style="height:50px; width:150px; margin-top: 15px; margin-bottom:-2px; margin-left:30px;">
         </a>
       </div>
     </div>
@@ -84,38 +216,54 @@
     <div class="navbar-dark navbar-collapse collapse" id="navbarCollapse">
       <ul class="navbar-nav ml-auto">
         
-        <li class="nav-item">
-          <a class="nav-link scrollto " href="/#home">Home</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link scrollto" href="/#home">Home</a>
+          </li>
         
-        <li class="nav-item">
-          <a class="nav-link scrollto " href="/#about">About</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link scrollto" href="/#about">About</a>
+          </li>
         
-        <li class="nav-item">
-          <a class="nav-link scrollto " href="/#skills">Skills</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link scrollto" href="/#skills">Skills</a>
+          </li>
         
-        <li class="nav-item">
-          <a class="nav-link scrollto " href="/#portfolio">Portfolio</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link scrollto" href="/#portfolio">Portfolio</a>
+          </li>
         
-        <li class="nav-item">
-          <a class="nav-link scrollto " href="/#blog">Blog</a>
-        </li>
+          <li class="nav-item">
+            <a class="nav-link scrollto" href="/#blog">Blog</a>
+          </li>
         
-        <li class="nav-item">
-          <a class="nav-link scrollto " href="/#contact">Contact</a>
-        </li>
+  
         
-        <li class="nav-item">
-          <a class="nav-link scrollto " href="/#more">More</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle scrollable-nav-item" href="#" id="more-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            More
+            <img src="/images/dropdown-menu-icon-12.jpg" alt="Dropdown" class="dropdown-icon ml-1">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="more-dropdown">
+            
+            <a class="dropdown-item scrollto" href="#education">Education</a>
+            <a class="dropdown-item scrollto" href="#experience">Experience</a>
+            <a class="dropdown-item scrollto" href="#services">Services</a>
+            <a class="dropdown-item scrollto" href="#contact">Contact</a>
+            
+            
+            
+            <hr>
+            
+            
+              <a class="dropdown-item" href="/blog/">Blog Page</a>
+            
+              <a class="dropdown-item" href="/portfolio/">Portfolio Page</a>
+            
+          </div>
         </li>
-        
       </ul>
     </div>
   </nav>
-
   
   
   <a href="#" class="btn-back-to-top scrollto btn btn-icon btn-primary shadow-light mb-4 mr-4" tabindex="-1">
@@ -123,17 +271,46 @@
   </a>
   </header>
   
-  
-  
-  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var dropdownItems = document.querySelectorAll('.dropdown-item.scrollto');
+      var logoImage = document.getElementById('logoImage');
+      var siteNavbar = document.getElementById('siteNavbar');
+    
+      dropdownItems.forEach(function(item) {
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          var targetId = this.getAttribute('href').substring(1);
+          var targetSection = document.getElementById(targetId);
+    
+          if (targetSection) {
+            targetSection.scrollIntoView({ behavior: 'smooth' });
+          }
+    
+          
+          document.querySelector('.dropdown-menu').style.display = 'none';
+        });
+      });
+    
+      
+      function updateLogo() {
+        if (siteNavbar.classList.contains('navbar-scrolled')) {
+          logoImage.src = '/images/name_logo.png';
+        } else {
+          logoImage.src = '/images/name_logo_v2.png';
+        }
+      }
+    
+      
+      updateLogo();
+    
+      
+      window.addEventListener('scroll', updateLogo);
+    });
+    </script>
 
-
-
-
-
-
-<main>
-
+  <main>
+      
   <h1>Post 3</h1>
 
   
@@ -145,112 +322,222 @@
 <p>Sit excepteur do velit veniam mollit in nostrud laboris incididunt ea. Amet eu cillum ut reprehenderit culpa aliquip labore laborum amet sit sit duis. Laborum id proident nostrud dolore laborum reprehenderit quis mollit nulla amet veniam officia id id. Aliquip in deserunt qui magna duis qui pariatur officia sunt deserunt.</p>
 
   
-  <div>
-    <div>Tags:</div>
-    <ul>
-        <li><a href="/tags/red/">Red</a></li>
-        <li><a href="/tags/green/">Green</a></li>
-        <li><a href="/tags/blue/">Blue</a></li>
-    </ul>
-  </div>
 
 
-</main>
-<footer>
+  </main>
+
+  <footer>
+      
 
 
 
+<section>
+	<div class="container">
+		<div class="row">
+			
+				<div class="social-links">
 
-</footer>
+					<ul>
+						
+						<li>
+							<a href="https://twitter.com/yourprofile" target="_blank" title="Twitter">
+								Twitter
+							</a>
+						</li>	
+						
+						<li>
+							<a href="https://linkedin.com/in/yourprofile" target="_blank" title="LinkedIn">
+								LinkedIn
+							</a>
+						</li>	
+						
+						<li>
+							<a href="https://github.com/yourprofile" target="_blank" title="GitHub">
+								GitHub
+							</a>
+						</li>	
+						
+					</ul>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var siteNavbar = document.querySelector('.site-navbar');
-  var navLinks = document.querySelectorAll('.site-navbar .navbar-nav .nav-link');
-  var btnBackToTop = document.querySelector('.btn-back-to-top');
+				</div>
 
-  function updateNavbarColors() {
-    var scrollTop = window.scrollY;
-    if (scrollTop > 0) {
-      siteNavbar.classList.add('navbar-scrolled', 'navbar-light');
-      siteNavbar.classList.remove('navbar-dark', 'bg-transparent');
-      setNavLinkColors('#333');
-    } else {
-      siteNavbar.classList.remove('navbar-scrolled', 'navbar-light');
-      siteNavbar.classList.add('navbar-dark', 'bg-transparent');
-      setNavLinkColors('white');
-    }
+				<div class="copyright">
+					<p>Your Company Name 2024. Design & Coded by<a href='http://YourWebsite.com' target='_blank'> Creative Designs</a></p>
+                    
+				</div>
+		</div>
+		
+	</div>	
+</section>
 
-    if (scrollTop > 400) {
-      btnBackToTop.classList.add('show');
-    } else {
-      btnBackToTop.classList.remove('show');
-    }
 
-    
-    updateActiveLink();
-  }
 
-  function setNavLinkColors(color) {
-    navLinks.forEach(function(link) {
-      link.style.color = color;
-      link.style.setProperty('--hover-color', color);
-    });
-  }
+  </footer>
 
-  function updateActiveLink() {
-    var scrollPosition = window.scrollY;
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var siteNavbar = document.querySelector('.site-navbar');
+      var navLinks = document.querySelectorAll('.site-navbar .navbar-nav .nav-link');
+      var btnBackToTop = document.querySelector('.btn-back-to-top');
+      var currentPath = window.location.pathname;
+      var dropdownIcons = document.querySelectorAll('.dropdown-icon');
+      var logoImage = document.getElementById('logoImage');
 
-    navLinks.forEach(function(link) {
-      var section = document.querySelector(link.getAttribute('href'));
-      if (section) {
-        var sectionTop = section.offsetTop - 100; 
-        var sectionBottom = sectionTop + section.offsetHeight;
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          navLinks.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-        }
-      }
-    });
-  }
-
-  window.addEventListener('scroll', updateNavbarColors);
-
-  
-  updateNavbarColors();
-
-  
-  navLinks.forEach(function(link) {
-    link.addEventListener('mouseenter', function() {
-      this.style.color = 'var(--hover-color, ' + (window.scrollY > 0 ? '#333' : 'white') + ')';
-    });
-    link.addEventListener('mouseleave', function() {
-      this.style.color = window.scrollY > 0 ? '#333' : 'white';
-    });
-  });
-
-  
-  navLinks.forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var targetId = this.getAttribute('href');
-      var targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 70, 
-          behavior: 'smooth'
+      function setActiveNavItem() {
+        navLinks.forEach(function(link) {
+          if (link.getAttribute('href') === currentPath || 
+              (currentPath === '/' && link.getAttribute('href') === '/index.html')) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
         });
       }
-    });
-  });
 
-  btnBackToTop.addEventListener('click', function(e) {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-});
-</script>
+      function updateNavbarColors() {
+        var scrollTop = window.scrollY;
+
+        if (scrollTop > 0) {
+          siteNavbar.classList.add('navbar-scrolled');
+          siteNavbar.classList.remove('navbar-transparent');
+          logoImage.src = '/images/name_logo.png';
+        } else {
+          siteNavbar.classList.remove('navbar-scrolled');
+          siteNavbar.classList.add('navbar-transparent');
+          logoImage.src = '/images/name_logo_v2.png';
+        }
+
+        if (scrollTop > 400) {
+          btnBackToTop.classList.add('show');
+        } else {
+          btnBackToTop.classList.remove('show');
+        }
+
+        var sections = document.querySelectorAll('main section');
+        var currentActiveSection = null;
+
+        sections.forEach(function(section) {
+          var sectionTop = section.offsetTop - 100;
+          var sectionBottom = sectionTop + section.offsetHeight;
+
+          if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+            currentActiveSection = section;
+          }
+        });
+
+        if (currentActiveSection) {
+          var sectionId = currentActiveSection.id;
+          navLinks.forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href.substring(href.lastIndexOf('#') + 1) === sectionId) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      }
+
+      
+      function setInitialNavbarState() {
+        if (window.scrollY === 0) {
+          siteNavbar.classList.add('navbar-transparent');
+          siteNavbar.classList.remove('navbar-scrolled');
+          logoImage.src = '/images/name_logo_v2.png';
+        } else {
+          siteNavbar.classList.add('navbar-scrolled');
+          siteNavbar.classList.remove('navbar-transparent');
+          logoImage.src = '/images/name_logo.png';
+        }
+        updateNavbarColors();
+      }
+
+      window.addEventListener('scroll', updateNavbarColors);
+      setActiveNavItem();
+      setInitialNavbarState();
+
+      var dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach(function(dropdown) {
+        dropdown.addEventListener('mouseover', function() {
+          this.querySelector('.dropdown-menu').style.display = 'block';
+        });
+        dropdown.addEventListener('mouseout', function() {
+          this.querySelector('.dropdown-menu').style.display = 'none';
+        });
+      });
+
+      btnBackToTop.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          var href = this.getAttribute('href');
+          var hashIndex = href.indexOf('#');
+
+          if (hashIndex !== -1) {
+            e.preventDefault();
+            var targetId = href.substring(hashIndex + 1);
+            var targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            navLinks.forEach(function(navLink) {
+              navLink.classList.remove('active');
+            });
+            this.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+
+    
+    <script src="path/to/typed.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var options = {
+        strings: ["Kevin Chisholm", "UI/UX Designer", "Fullstack Developer", "Cloud Solutions Architect"],
+        typeSpeed: 50,
+        backSpeed: 50,
+        loop: true
+      };
+      var typed = new Typed(".font-weight-bold", options);
+    });
+    </script>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var filterButtons = document.querySelectorAll('.masonry-filter a');
+        var portfolioItems = document.querySelectorAll('.masonry-item');
+      
+        filterButtons.forEach(function(button) {
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            var filter = this.getAttribute('data-filter');
+      
+            filterButtons.forEach(function(btn) {
+              btn.classList.remove('active');
+            });
+            this.classList.add('active');
+      
+            portfolioItems.forEach(function(item) {
+              if (filter === 'all' || item.classList.contains(filter)) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
+      });
+    </script>
+
 
 </body>
+
 </html>

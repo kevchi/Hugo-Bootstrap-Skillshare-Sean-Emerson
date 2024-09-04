@@ -1,144 +1,349 @@
 <!DOCTYPE html>
 <html lang="{{ or site.Language.LanguageCode }}" dir="{{ or site.Language.LanguageDirection `ltr` }}">
 <head>
-{{ partial "head.html" . }}
 
-<style>
-.navbar-nav .nav-link {
-  position: relative;
-  color: white;
-  transition: color 0.3s ease;
-}
+    {{ partial "head.html" . }}
 
-.navbar-nav .nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  background-color: white; /* Default color */
-  transition: all 0.3s ease;
-}
+    <style>
+      .navbar-nav .nav-link {
+          position: relative;
+          transition: color 0.3s ease;
+      }
 
-.navbar-nav .nav-link.active::after,
-.navbar-nav .nav-link:hover::after {
-  width: 100%;
-  left: 0;
-}
+      .navbar-nav .nav-link::after {
+          content: "";
+          position: absolute;
+          width: 0;
+          height: 2px;
+          bottom: 0;
+          left: 50%;
+          transition: all 0.3s ease;
+      }
 
-.navbar-light .navbar-nav .nav-link::after {
-  background-color: #333; /* Color when navbar is light */
-}
+      .navbar-nav .nav-link.active::after,
+      .navbar-nav .nav-link:hover::after {
+          width: 100%;
+          left: 0;
+      }
 
-.site-navbar .navbar-nav .nav-link {
-  color: white;
-}
+      .navbar-light .navbar-nav .nav-link {
+          color: black;
+      }
 
-.navbar-light .navbar-nav .nav-link {
-  color: #333;
-}
+      .navbar-light .navbar-nav .nav-link::after {
+          background-color: black;
+      }
 
-</style>
+      .site-navbar .navbar-nav .nav-link {
+          color: white;
+      }
+
+      .site-navbar .navbar-nav .nav-link::after {
+          background-color: white;
+      }
+
+      /* Ensure active state is not overridden */
+      .navbar-nav .nav-link.active::after {
+          width: 100% !important;
+      }
+
+      .btn-back-to-top {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          display: none;
+          z-index: 1000;
+      }
+
+      .btn-back-to-top.show {
+          display: block;
+      }
+
+      /* Dropdown styles */
+      .dropdown-toggle::after {
+          display: none !important;
+      }
+
+      .dropdown-icon {
+          width: 20px;
+          height: 20px;
+          transition: transform 0.3s ease;
+          margin-left: 5px;
+      }
+
+      .dropdown:hover .dropdown-icon {
+          transform: rotate(180deg);
+      }
+
+      .dropdown-menu {
+          display: block;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          z-index: 1000;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      .dropdown:hover .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+      }
+
+      .dropdown-item {
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+      }
+
+      .dropdown-item:hover {
+          background-color: #f1f1f1;
+      }
+
+      .nav-link.dropdown-toggle {
+          display: flex;
+          align-items: center;
+      }
+
+      .down-arrow {
+          font-size: 24px;
+      }
+
+      .down-arrow::before {
+          content: "\25BC";
+          font-size: 24px;
+      }
+
+
+      /* Navbar state-based styling */
+      .navbar-scrolled {
+        background-color: white !important;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar-scrolled .navbar-nav .nav-link {
+        color: black !important;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-scrolled .navbar-nav .nav-link::after {
+        background-color: black !important;
+    }
+
+    .navbar-transparent {
+        background-color: transparent !important;
+        transition: background-color 0.3s ease;
+    }
+
+    .navbar-transparent .navbar-nav .nav-link {
+        color: white !important;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-transparent .navbar-nav .nav-link::after {
+        background-color: white !important;
+    }
+
+    /* Add styles for the dropdown arrow */
+    .navbar-transparent .dropdown-icon {
+        filter: brightness(0) invert(1);
+    }
+
+    .navbar-scrolled .dropdown-icon {
+        filter: none;
+    }
+
+    /* New styles for active nav item */
+    .navbar-transparent .navbar-nav .nav-link.active {
+        color: white !important;
+    }
+
+    .navbar-scrolled .navbar-nav .nav-link.active {
+        color: black !important;
+    }
+  </style>
 
 </head>
+
 <body>
-{{ partial "header.html" . }}
-<main>
-{{ block "main" . }}{{ end }}
-</main>
-<footer>
-{{ partial "footer.html" . }}
-</footer>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var siteNavbar = document.querySelector('.site-navbar');
-  var navLinks = document.querySelectorAll('.site-navbar .navbar-nav .nav-link');
-  var btnBackToTop = document.querySelector('.btn-back-to-top');
+  {{ partial "header.html" . }}
 
-  function updateNavbarColors() {
-    var scrollTop = window.scrollY;
-    if (scrollTop > 0) {
-      siteNavbar.classList.add('navbar-scrolled', 'navbar-light');
-      siteNavbar.classList.remove('navbar-dark', 'bg-transparent');
-      setNavLinkColors('#333');
-    } else {
-      siteNavbar.classList.remove('navbar-scrolled', 'navbar-light');
-      siteNavbar.classList.add('navbar-dark', 'bg-transparent');
-      setNavLinkColors('white');
-    }
+  <main>
+      {{ block "main" . }}{{ end }}
+  </main>
 
-    if (scrollTop > 400) {
-      btnBackToTop.classList.add('show');
-    } else {
-      btnBackToTop.classList.remove('show');
-    }
+  <footer>
+      {{ partial "footer.html" . }}
+  </footer>
 
-    // Update active link based on scroll position
-    updateActiveLink();
-  }
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var siteNavbar = document.querySelector('.site-navbar');
+      var navLinks = document.querySelectorAll('.site-navbar .navbar-nav .nav-link');
+      var btnBackToTop = document.querySelector('.btn-back-to-top');
+      var currentPath = window.location.pathname;
+      var dropdownIcons = document.querySelectorAll('.dropdown-icon');
+      var logoImage = document.getElementById('logoImage');
 
-  function setNavLinkColors(color) {
-    navLinks.forEach(function(link) {
-      link.style.color = color;
-      link.style.setProperty('--hover-color', color);
-    });
-  }
-
-  function updateActiveLink() {
-    var scrollPosition = window.scrollY;
-
-    navLinks.forEach(function(link) {
-      var section = document.querySelector(link.getAttribute('href'));
-      if (section) {
-        var sectionTop = section.offsetTop - 100; // Adjust offset as needed
-        var sectionBottom = sectionTop + section.offsetHeight;
-
-        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-          navLinks.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-        }
-      }
-    });
-  }
-
-  window.addEventListener('scroll', updateNavbarColors);
-
-  // Initial check on page load
-  updateNavbarColors();
-
-  // Add hover effect
-  navLinks.forEach(function(link) {
-    link.addEventListener('mouseenter', function() {
-      this.style.color = 'var(--hover-color, ' + (window.scrollY > 0 ? '#333' : 'white') + ')';
-    });
-    link.addEventListener('mouseleave', function() {
-      this.style.color = window.scrollY > 0 ? '#333' : 'white';
-    });
-  });
-
-  // Add click event to nav links for smooth scrolling
-  navLinks.forEach(function(link) {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      var targetId = this.getAttribute('href');
-      var targetElement = document.querySelector(targetId);
-      if (targetElement) {
-        window.scrollTo({
-          top: targetElement.offsetTop - 70, // Adjust offset as needed
-          behavior: 'smooth'
+      function setActiveNavItem() {
+        navLinks.forEach(function(link) {
+          if (link.getAttribute('href') === currentPath || 
+              (currentPath === '/' && link.getAttribute('href') === '/index.html')) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
         });
       }
-    });
-  });
 
-  btnBackToTop.addEventListener('click', function(e) {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-});
-</script>
+      function updateNavbarColors() {
+        var scrollTop = window.scrollY;
+
+        if (scrollTop > 0) {
+          siteNavbar.classList.add('navbar-scrolled');
+          siteNavbar.classList.remove('navbar-transparent');
+          logoImage.src = '/images/name_logo.png';
+        } else {
+          siteNavbar.classList.remove('navbar-scrolled');
+          siteNavbar.classList.add('navbar-transparent');
+          logoImage.src = '/images/name_logo_v2.png';
+        }
+
+        if (scrollTop > 400) {
+          btnBackToTop.classList.add('show');
+        } else {
+          btnBackToTop.classList.remove('show');
+        }
+
+        var sections = document.querySelectorAll('main section');
+        var currentActiveSection = null;
+
+        sections.forEach(function(section) {
+          var sectionTop = section.offsetTop - 100;
+          var sectionBottom = sectionTop + section.offsetHeight;
+
+          if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+            currentActiveSection = section;
+          }
+        });
+
+        if (currentActiveSection) {
+          var sectionId = currentActiveSection.id;
+          navLinks.forEach(function(link) {
+            var href = link.getAttribute('href');
+            if (href.substring(href.lastIndexOf('#') + 1) === sectionId) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      }
+
+      // Set initial navbar state
+      function setInitialNavbarState() {
+        if (window.scrollY === 0) {
+          siteNavbar.classList.add('navbar-transparent');
+          siteNavbar.classList.remove('navbar-scrolled');
+          logoImage.src = '/images/name_logo_v2.png';
+        } else {
+          siteNavbar.classList.add('navbar-scrolled');
+          siteNavbar.classList.remove('navbar-transparent');
+          logoImage.src = '/images/name_logo.png';
+        }
+        updateNavbarColors();
+      }
+
+      window.addEventListener('scroll', updateNavbarColors);
+      setActiveNavItem();
+      setInitialNavbarState();
+
+      var dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach(function(dropdown) {
+        dropdown.addEventListener('mouseover', function() {
+          this.querySelector('.dropdown-menu').style.display = 'block';
+        });
+        dropdown.addEventListener('mouseout', function() {
+          this.querySelector('.dropdown-menu').style.display = 'none';
+        });
+      });
+
+      btnBackToTop.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          var href = this.getAttribute('href');
+          var hashIndex = href.indexOf('#');
+
+          if (hashIndex !== -1) {
+            e.preventDefault();
+            var targetId = href.substring(hashIndex + 1);
+            var targetSection = document.getElementById(targetId);
+
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            navLinks.forEach(function(navLink) {
+              navLink.classList.remove('active');
+            });
+            this.classList.add('active');
+          }
+        });
+      });
+    });
+  </script>
+
+    {{/* typed.js */}}
+    <script src="path/to/typed.min.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var options = {
+        strings: ["Kevin Chisholm", "UI/UX Designer", "Fullstack Developer", "Cloud Solutions Architect"],
+        typeSpeed: 50,
+        backSpeed: 50,
+        loop: true
+      };
+      var typed = new Typed(".font-weight-bold", options);
+    });
+    </script>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var filterButtons = document.querySelectorAll('.masonry-filter a');
+        var portfolioItems = document.querySelectorAll('.masonry-item');
+      
+        filterButtons.forEach(function(button) {
+          button.addEventListener('click', function(e) {
+            e.preventDefault();
+            var filter = this.getAttribute('data-filter');
+      
+            filterButtons.forEach(function(btn) {
+              btn.classList.remove('active');
+            });
+            this.classList.add('active');
+      
+            portfolioItems.forEach(function(item) {
+              if (filter === 'all' || item.classList.contains(filter)) {
+                item.style.display = 'block';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
+      });
+    </script>
+
 
 </body>
+
 </html>

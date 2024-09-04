@@ -9,64 +9,50 @@ summaryLength = 50
 DefaultContentLanguage = "en"
 
 # Menu Settings
-[menu]
-  [[menu.main]]
-    identifier = "home"
-    name = "Home"
-    url = "#home"
-    weight = 1
+[[menu.main]]
+identifier = "home"
+name = "Home"
+url = "#home"
+weight = 1
 
-  [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "#about"
-    weight = 2
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "#about"
+weight = 2
 
-  [[menu.main]]
-    identifier = "skills"
-    name = "Skills"
-    url = "#skills"
-    weight = 3
+[[menu.main]]
+identifier = "skills"
+name = "Skills"
+url = "#skills"
+weight = 3
 
-  [[menu.main]]
-    identifier = "portfolio"
-    name = "Portfolio"
-    url = "#portfolio"
-    weight = 4
+[[menu.main]]
+identifier = "portfolio"
+name = "Portfolio"
+url = "#portfolio"
+weight = 4
 
-  [[menu.main]]
-    identifier = "blog"
-    name = "Blog"
-    url = "#blog"
-    weight = 5
+[[menu.main]]
+identifier = "blog"
+name = "Blog"
+url = "#blog"
+weight = 5
 
-  [[menu.main]]
-    identifier = "contact"
-    name = "Contact"
-    url = "#contact"
-    weight = 6
+# Separate dropdown menu
+[[menu.dropdown]]
+identifier = "blog-pages"
+name = "Blog Page"
+url = "/blog/"
+weight = 1
 
-  [[menu.main]]
-    identifier = "more"
-    name = "More"
-    url = "#more"
-    weight = 7
+[[menu.dropdown]]
+identifier = "portfolio-pages"
+name = "Portfolio Page"
+url = "/portfolio/"
+weight = 2
 
-  [[menu.main]]
-    identifier = "blog-pages"
-    parent = "more"
-    name = "Blog Page"
-    url = "/blog/"
-    weight = 1
-
-  [[menu.main]]
-    identifier = "portfolio-pages"
-    parent = "more"
-    name = "Portfolio Page"
-    url = "/blog/"
-    weight = 2
-
-# Main Settings
+# The rest of your configuration...
 [params]
 defaultLogo = "images/logo-white.png"
 defaultKeywords = ["clean", "minimal", "blog", "responsive", "google analytics", "bootstrap", "portfolio", "personal", "modern", "parallax", "hugo theme", "creative"]
@@ -78,23 +64,43 @@ formspreeFormID = "" # YOUR FORMSPREE FORM ID
 reCAPTCHAKey = "" # YOUR reCAPTCHA v2 key
 googleMapsApiKey = "" # YOUR GOOGLE API KEY
 
-# Header Settings
 [params.header]
 logo = "images/logo2.png"
 logo_alt = "Kevin Chisholm"
 
-[params.about]
 
-[params.subscribe]
-
-# Portfolio Settings (Filter)
-[params.portfolio]
 
 # Footer Settings
 [params.footer]
+copyright = "Your Company Name"
 
 # Social Settings
-  [[params.social]]
+[[params.social]]
+title = "Twitter"
+url = "https://twitter.com/yourprofile"
+[[params.social]]
+title = "LinkedIn"
+url = "https://linkedin.com/in/yourprofile"
+[[params.social]]
+title = "GitHub"
+url = "https://github.com/yourprofile"
+
+# Social Settings
+[[params.social]]
+title = "Twitter"
+icon = "fab fa-twitter"
+url = "https://www.twitter.com/"
+weight = 1
+[[params.social]]
+title = "Dribbble"
+icon = "fab fa-dribbble"
+url = "https://www.dribbble.com/"
+weight = 2
+[[params.social]]
+title = "Behance"
+icon = "fab fa-behance"
+url = "https://www.behance.net/"
+weight = 3
 
 # Sitemap Settings
 [sitemap]
@@ -108,3 +114,6 @@ home = ["HTML", "RSS", "JSON"]
 
 [minify]
   minifyJS = true
+
+[taxonomies]
+category = "categories"
